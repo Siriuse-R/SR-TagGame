@@ -1,0 +1,6 @@
+name: SR-TagGame
+version: version-number-unknown
+description: TagGame Plugin.
+authors: [SiriuseR]
+website: http://www.siriuser.net/
+main: net.siriuser.taggame.TagGame
