@@ -5,6 +5,7 @@
  */
 package net.siriuser.taggame;
 
+import net.siriuser.taggame.listeners.AutoSneakListener;
 import net.syamn.utils.LogUtil;
 
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -23,6 +24,7 @@ public class TagGame extends JavaPlugin {
         LogUtil.init(this);
 
         PluginManager pm = getServer().getPluginManager();
+        pm.registerEvents(new AutoSneakListener(this), this);
 
         PluginDescriptionFile pdfFile = this.getDescription();
         LogUtil.info(pdfFile.getName() + " version " + pdfFile.getVersion() + " is enabled!");
