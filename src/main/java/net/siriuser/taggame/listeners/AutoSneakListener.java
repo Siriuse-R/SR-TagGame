@@ -7,6 +7,7 @@ package net.siriuser.taggame.listeners;
 
 import net.siriuser.taggame.TagGame;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -24,23 +25,18 @@ public class AutoSneakListener implements Listener {
         this.plugin = plugin;
 
         /* プラグイン起動時に自動的にスニークに設定する */
-        //TODO: タスク化
-        for (Player player : plugin.getServer().getOnlinePlayers()) {
-            player.setSneaking(true);
-        }
+        setupSneak(true);
     }
 
     @EventHandler
     public void JoinSneak(final PlayerJoinEvent event) {
         final Player player = event.getPlayer();
-        //TODO: スニークのタスク化
         player.setSneaking(true);
     }
 
     @EventHandler
     public void RespawnSneak(final PlayerRespawnEvent event) {
         final Player player = event.getPlayer();
-        //TODO: スニークのタスク化
         player.setSneaking(true);
     }
 
@@ -50,5 +46,16 @@ public class AutoSneakListener implements Listener {
         //TODO: スニークのタスク化
         player.setSneaking(true);
         event.setCancelled(true);
+    }
+
+    public void setupSneak(final boolean sneak) {
+        plugin.getServer().getScheduler().runTask(plugin, new Runnable() {
+            @Override
+            public void run() {
+                for (final Player player : Bukkit.getOnlinePlayers()) {
+                    player.setSneaking(sneak);
+                }
+            }
+        });
     }
 }
